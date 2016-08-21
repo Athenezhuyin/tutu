@@ -1,0 +1,79 @@
+<div id="addwin" class="easyui-window" modal="true" title="增加" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-add" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="addee"></div>
+			<br>
+			<div align="center">
+				<a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onClick="hc_addsave('addForm','savePerson.action')">确认</a>
+				<a class="easyui-linkbutton" iconCls="icon-reload" href="javascript:void(0)" onClick="clr()">清空</a>					
+			</div>
+	</div>
+	
+	<form id="addForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table cellpadding="5" >
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp酒店名称
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" value="" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;属地
+				</th>
+				<td>
+					<select class="easyui-combobox" name="language" >
+						<option value="area">--请选择--</option>
+						<option value="area">--陕西省--</option>
+					</select>&nbsp;
+					<select class="easyui-combobox" name="language">
+						<option value="area">--请选择--</option>
+						<option value="ar">--渭南市--</option>	
+					</select>&nbsp;
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;联系人
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" value="" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;电话
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" value="" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;邮箱
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" 	value="" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;基本信息
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" 	value="" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;酒店简介
+				</th>
+				<td>
+					<textarea  name="client.remark" class="easyui-textbox"  type='text' size="60" style="width:600px;height:100px" ></textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>

@@ -1,0 +1,53 @@
+package com.zrcx.tutu.JLMg.dao;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
+
+import com.common.dao.BaseDao;
+
+
+
+@Repository(value="jLDao")
+public class JLDao extends BaseDao{
+	
+	public static void main(String[] args) {
+		System.out.println(new JLDao().getProvince());
+	}
+
+	/**
+	 * 
+	 * @Description: 在province表中获得所有省的id和省名
+	 * @return   
+	 * List<Object[]>  
+	 * @throws
+	 * @author Guo
+	 * @date 2016年7月1日 上午12:11:08
+	 */
+	public List<Object[]> getProvince(){
+		Session session = getSession();
+		Query query = session.createQuery("select Id ,Name from Province order by Id");
+		return query.list();
+	}
+	
+	
+	/**
+	 * 
+	 * @Description: 在city表中，找到给定省的所有城市id和市名
+	 * @param provinceid
+	 * @return   
+	 * List<Object[]>  
+	 * @throws
+	 * @author Guo
+	 * @date 2016年7月1日 上午12:12:01
+	 */
+	public List<Object[]> getCity(int provinceid){
+		Session session = getSession();
+		Query query = session.createQuery("select Id, Name from City where provinceId=? order by Id");
+		query.setInteger(0, provinceid);
+		return query.list();
+		
+	}
+}

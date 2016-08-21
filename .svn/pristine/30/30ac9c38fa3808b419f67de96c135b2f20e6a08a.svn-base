@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 1.jquery-easyui 
+				1.µ¼°ü js css 
+				2.ÅäÖÃ
+					html
+		-->
+		<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+		<script type="text/javascript" src="../../jquery.min.js"></script>
+		<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	</head>
+	<body>
+		
+		<div class="easyui-accordion" style="width:500px;height:300px;">
+			<div title="helloworld" data-options="iconCls:'icon-no'" style="overflow:auto;padding:100px;">
+					fdsafsafdsafsaf
+					fdsafdsafdsafdsafdsa
+			</div>
+			<div title="About" data-options="iconCls:'icon-no'" style="overflow:auto;padding:100;">
+					fdsafsafdsafsaf
+					fdsafdsafdsafdsafdsa
+			</div>
+		</div>
+		
+	</body>
+</html>

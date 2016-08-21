@@ -1,0 +1,169 @@
+package com.zrcx.tutu.travelMg.bean;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+/**
+ * 
+ * @Title: Goods.java
+ * @Package com.zrcx.tutu.goodsMg.bean
+ * @Description: 商品表
+ * 				itemid | goods_name | goods_price | product_Date
+ * @author Guo
+ * @date 2016年7月26日 下午3:57:51
+ * @version 1.0
+ */
+@Entity
+@Table(name="travel")
+public class Travel {
+	
+	/** --主键ID--**/
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="itemid", unique=true, nullable=false, length=2000)
+	private Long id;
+	
+	/**--旅行社ID--**/
+	@Column(name="travel_id", unique=false)
+//	@Column(name="travel_id", unique=false, nullable=true, length=2000)
+	private String travelId;
+	
+	/**--旅行社名称--**/
+	@Column(name="travel_name", unique=false)
+//	@Column(name="travel_name", unique=false, nullable=true, length=2000)
+	private String travelName;
+	
+	/**--属地--**/
+	@Column(name="travel_addr", unique=false)
+//	@Column(name="travel_addr", unique=false, nullable=true, length=2000)
+	private String travelAddr;
+	
+	/**--联系人--**/
+	@Column(name="linkman_name", unique=false)
+//	@Column(name="linkman_name", unique=false, nullable=true, length=2000)
+	private String linkmanName;
+	
+	/**--电话--**/
+	@Column(name="phone", unique=false)
+//	@Column(name="phone", unique=false, nullable=true, length=2000)	
+	private String phone;
+	
+	/**--手机--**/
+	@Column(name="cellphone", unique=false)
+//	@Column(name="cellphone", unique=false, nullable=true, length=2000)
+	private String cellphone;
+	
+	/**--传真--**/
+	@Column(name="fax", unique=false)
+//	@Column(name="fax", unique=false, nullable=true, length=2000)
+	private String fax;
+	
+	/**--地址--**/
+	@Column(name="linkman_addr", unique=false)
+//	@Column(name="linkman_addr", unique=false, nullable=true, length=2000)
+	private String linkmanAddr;
+	
+	/**--邮箱--**/
+	@Column(name="email", unique=false)
+//	@Column(name="email", unique=false, nullable=true, length=2000)
+	private String email;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTravelId() {
+		return travelId;
+	}
+
+	public void setTravelId(String travelId) {
+		this.travelId = travelId;
+	}
+
+	public String getTravelName() {
+		return travelName;
+	}
+
+	public void setTravelName(String travelName) {
+		this.travelName = travelName;
+	}
+
+	public String getTravelAddr() {
+		return travelAddr;
+	}
+
+	public void setTravelAddr(String travelAddr) {
+		this.travelAddr = travelAddr;
+	}
+
+	public String getLinkmanName() {
+		return linkmanName;
+	}
+
+	public void setLinkmanName(String linkmanName) {
+		this.linkmanName = linkmanName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getLinkmanAddr() {
+		return linkmanAddr;
+	}
+
+	public void setLinkmanAddr(String linkmanAddr) {
+		this.linkmanAddr = linkmanAddr;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Travel [id=" + id + ", travelId=" + travelId + ", travelName="
+				+ travelName + ", travelAddr=" + travelAddr + ", linkmanName="
+				+ linkmanName + ", phone=" + phone + ", cellphone=" + cellphone
+				+ ", fax=" + fax + ", linkmanAddr=" + linkmanAddr + ", email="
+				+ email + "]";
+	}
+
+	
+}

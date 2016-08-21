@@ -1,0 +1,3 @@
+java.util.Date = com.common.util.DateConvert
+java.sql.Timestamp = com.common.util.DateConvert
+java.sql.Time = com.common.util.DateConvert

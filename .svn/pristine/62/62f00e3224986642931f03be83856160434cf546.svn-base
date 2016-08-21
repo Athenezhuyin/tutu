@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+body {background:white;}
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+</head>
+<body>
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="../images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	<div class="easyui-tabs" fit="true">
+		<div title="测试头" style="padding:10px">
+			<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true">
+				<div title="测试列表" style="padding:10px;">
+					
+					<table id="tList" class="easyui-datagrid" title="list" data-options="pagination:true,fit:true,rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:'#tb',footer:'#ft'">
+						<thead>
+							<tr>
+								<th data-options="field:'id',width:150">测试ID</th>
+								<th data-options="field:'name',width:140">测试名称</th>
+								<th data-options="field:'opentime',width:130,align:'right'">活动时间</th>
+								<th data-options="field:'relationperson',width:200,align:'center'">负责人名称</th>
+							</tr>
+						</thead>
+					</table>
+					<div id="tb" style="padding:10px 5px;">
+						测试名称：<input class="easyui-textbox" type="text" name="name" style="width:100px" />
+						<a href="#" class="easyui-linkbutton" iconCls="icon-search">查看</a>
+					</div>
+					<div id="ft" style="padding:2px 5px;">
+						<a href="javascript:edit()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+						<a href="javascript:del('delete','deleteClient.action')" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+						<a href="javascript:view()" class="easyui-linkbutton" iconCls="icon-search" plain="true">查看</a>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="editwin" class="easyui-window" modal="true" title="修改测试信息" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-edit" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="editee"></div>
+			<br>
+			<div align="center">
+				<a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onClick="hc_addsave('addForm','savePerson.action')">确认</a>
+				<a class="easyui-linkbutton" iconCls="icon-reload" href="javascript:void(0)" onClick="clr()">清空</a>					
+			</div>
+	</div>
+	<form id="editForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table cellpadding="5" >
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;管理人员名称
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" value="董小姐" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;职位
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" value="管理员" size="20" maxlength="50" />
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;邮箱
+				</th>
+				<td>
+					<input class="easyui-combobox" 
+						name="language"
+						data-options="
+								url:'combobox_data1.json',
+								method:'get',
+								valueField:'id',
+								textField:'name',
+								multiple:true,
+								panelHeight:'auto'
+						">
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;地址信息
+				</th>
+				<td>
+					<select class="easyui-combogrid" style="width:250px" data-options="
+						panelWidth: 500,
+						multiple: true,
+						idField: 'id',
+						textField: 'name',
+						url: 'datagrid_data1.json',
+						method: 'get',
+						columns: [[
+							{field:'ck',checkbox:true},
+							{field:'id',title:'Item ID',width:80},
+							{field:'name',title:'Name',width:120}
+						]],
+						fitColumns: true
+					">
+	</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>
+	
+	<div id="viewwin" class="easyui-window" modal="true" title="查看测试信息" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="viewee"></div>
+			<br>
+			<div align="center">
+				<a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onClick="hc_addsave('addForm','savePerson.action')">确认</a>
+				<a class="easyui-linkbutton" iconCls="icon-reload" href="javascript:void(0)" onClick="clr()">清空</a>					
+			</div>
+	</div>
+	<form id="viewForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table cellpadding="5" >
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;管理人员名称
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" disabled="disabled" value="董小姐" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;职位
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="name" disabled="disabled" value="管理员" size="20" maxlength="50" />
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;邮箱
+				</th>
+				<td>
+					<input disabled="disabled"  class="easyui-combobox" 
+						name="language"
+						data-options="
+								url:'combobox_data1.json',
+								method:'get',
+								valueField:'id',
+								textField:'name',
+								multiple:true,
+								panelHeight:'auto'
+						">
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>
+	
+	
+	
+	
+	<div id="personwin" class="easyui-window" modal="true" title="查看人员信息" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="personee"></div>
+			<br>
+	</div>
+	
+	<form id="personForm" class="easyui-form"  method="post" action="" >
+	<div>
+
+	</div>
+    </form>
+	
+	
+	<div id="hotelwin" class="easyui-window" modal="true" title="查看酒店信息" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="hotelee"></div>
+			<br>
+	</div>
+	
+	<form id="hotelForm" class="easyui-form"  method="post" action="" >
+	<div>
+		
+	</div>
+    </form>
+	
+	
+	<div id="financewin" class="easyui-window" modal="true" title="查看财务统计" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="financeee"></div>
+			<br>
+			
+	</div>
+	
+	<form id="financeForm" class="easyui-form"  method="post" action="" >
+	<div>
+			
+	</div>
+    </form>
+	
+	
+	
+</body>
+</html>
+<script>
+$('#tt').tabs({   
+	//border:false,   
+	onSelect:function(title){   
+	    //alert(title+' is selected');   
+	}
+});
+
+function edit(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		hc_ButtonDefaultHandle("edit");
+	}
+}
+
+function view(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		hc_ButtonDefaultHandle("view");
+	}
+}
+
+function del(idName,actionUrl){
+		var row = $('#tList').datagrid('getSelected');
+		if(row==null){
+			alert("请选择一条数据！");
+			return;
+		}
+		var id;
+		id = row.id;
+		$.messager.confirm("确认提示框","确认删除吗？",function(b){
+			/**if(b){
+				$.ajax({
+					type : "post",
+					url : actionUrl,
+					data : idName+"="+id,
+					dataType : "json",
+					success:function(data){						
+						alert("删除成功！");
+						doquery();
+					}
+				});
+			}**/
+			alert("删除成功！");
+		});
+}
+
+
+
+function person(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		hc_ButtonDefaultHandle("person");
+	}
+}
+
+function finance(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		hc_ButtonDefaultHandle("finance");
+	}
+}
+function hotel(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		hc_ButtonDefaultHandle("hotel");
+	}
+}
+function hc_ButtonDefaultHandle(formID){
+	$('#' + formID + 'win').window('open');
+	$('#' + formID + 'Form').show();
+	$('#' + formID + 'Form').appendTo('#' + formID + 'ee');
+}
+</script>

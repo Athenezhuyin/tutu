@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+body {background:white;}
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+</head>
+<body>
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="../images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	<div class="easyui-tabs" fit="true">
+		<div title="出行活动" style="padding:10px">
+			<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true">
+				
+				<div title="添加活动" style="padding:10px;">
+					<table>
+						<tr align="center">
+							<td style="background-color: Silver;" width="80" height="20"><font size="1" color="white">基本设置</font></td>
+							<td width="10"></td>
+						</tr>
+					</table>	
+					<table width="70%" border="0" cellpadding="10" cellspacing="10" class="list">
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;活动名称：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;活动地址：&nbsp;
+								<input class="easyui-textbox" type="text" name="birthday" data-options="required:true"></input>
+							</td>
+							<td colspan="2">
+								<font color="red">*</font>&nbsp;活动类型：&nbsp;
+								<select class="easyui-combobox" name="language" style="width:152px;"><option value="ar">----请选择----</option></select>&nbsp;
+							</td>
+						</tr>
+						
+						<tr>
+					</table>
+					<table>
+						<tr align="center">
+							<td style="background-color: Silver;" width="80" height="20"><font size="1" color="white">高级设置</font></td>
+							<td width="10"></td>
+						</tr>
+					</table>
+					
+					<table width="70%" border="0" cellpadding="10" cellspacing="10" class="list">
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;酒店列表：&nbsp;
+								<input class="easyui-combobox" 
+										name="language"
+										data-options="
+												url:'combobox_data1.json',
+												method:'get',
+												valueField:'id',
+												textField:'text',
+												multiple:true,
+												panelHeight:'auto'
+										">
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;人员列表：&nbsp;
+								<input class="easyui-combobox" 
+										name="language"
+										data-options="
+												url:'combobox_data2.json',
+												method:'get',
+												valueField:'id',
+												textField:'text',
+												multiple:true,
+												panelHeight:'auto'
+										">
+							</td>
+						</tr>				
+					</table>
+					<table>
+						<tr align=center">
+							<td style="background-color: Silver;" width="80" height="20"><font size="1" color="white">财务设置</font></td>
+							<td width="10"></td>
+						</tr>
+					</table>
+					
+					<table width="70%" border="0" cellpadding="10" cellspacing="10" class="list">
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;渠道人数：&nbsp;
+								<select class="easyui-combogrid" style="width:250px" data-options="
+													panelWidth: 500,
+													multiple: true,
+													idField: 'itemid',
+													textField: 'productname',
+													url: 'datagrid_data3.json',
+													method: 'get',
+													columns: [[
+														{field:'ck',checkbox:true},
+														{field:'itemid',title:'Item ID',width:80},
+														{field:'productname',title:'Product',width:120},
+														{field:'listprice',title:'List Price',width:80,align:'right'},
+														{field:'unitcost',title:'Unit Cost',width:80,align:'right'},
+														{field:'attr1',title:'Attribute',width:200},
+														{field:'status',title:'Status',width:60,align:'center'}
+													]],
+													fitColumns: true
+												">
+											</select>
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;旅行社人数：&nbsp;
+								<select class="easyui-combogrid" style="width:250px" data-options="
+												panelWidth: 500,
+												multiple: true,
+												idField: 'itemid',
+												textField: 'productname',
+												url: 'datagrid_data3.json',
+												method: 'get',
+												columns: [[
+													{field:'ck',checkbox:true},
+													{field:'itemid',title:'Item ID',width:80},
+													{field:'productname',title:'Product',width:120},
+													{field:'listprice',title:'List Price',width:80,align:'right'},
+													{field:'unitcost',title:'Unit Cost',width:80,align:'right'},
+													{field:'attr1',title:'Attribute',width:200},
+													{field:'status',title:'Status',width:60,align:'center'}
+												]],
+												fitColumns: true
+											">
+										</select>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;渠道钱数：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;旅行社钱数：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;酒店钱数：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;景区钱数组：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" onfocus="openClient()" value=”此处触发事件，弹出窗口，一对多景区的钱“  data-options="required:true" ></input>
+								<input  type="hidden" name="name" onblur="openClient()"></input>
+							</td>
+						</tr>
+						<tr>
+					</table>
+				
+				</div>
+				
+			</div>;
+		</div>
+	</div>
+	
+	
+	<div id="financewin" class="easyui-window" modal="true" title="添加财务统计" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="financeee"></div>
+			<br>
+	</div>
+	
+	<form id="financeForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table  border="1px">
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;如家酒店详细信息
+				</th>
+				<td>
+				
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;速8酒店详细信息
+				</th>
+				<td>
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>
+</body>
+</html>
+<script>
+$('#tt').tabs({   
+	//border:false,   
+	onSelect:function(title){   
+	    //alert(title+' is selected');   
+	}
+});
+function openClient(){
+		alert(1);
+		hc_ButtonDefaultHandle("finance");
+	}
+function hc_ButtonDefaultHandle(formID){
+	$('#' + formID + 'win').window('open');
+	$('#' + formID + 'Form').show();
+	$('#' + formID + 'Form').appendTo('#' + formID + 'ee');
+}
+</script>

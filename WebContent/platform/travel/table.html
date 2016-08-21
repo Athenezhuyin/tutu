@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+body {background:white;}
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+</head>
+<body>
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="../images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	<div class="easyui-tabs" fit="true">
+		<div title="旅行社管理" style="padding:10px">
+			<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true">
+				<div title="旅行社列表" style="padding:10px;">
+					
+					<table id="tList" class="easyui-datagrid" title="list" data-options="pagination:true,fit:true,rownumbers:true,singleSelect:true,url:'travelAction_getTravelPage.action',method:'get',toolbar:'#tb',footer:'#ft'">
+						<thead>
+							<tr>
+								<th data-options="field:'travelId',width:100">旅行社ID</th>
+								<th data-options="field:'travelName',width:140">旅行社名称</th>
+								<th data-options="field:'province',width:140">
+								<th data-options="field:'city',width:140">属地</th></th>
+								<th data-options="field:'linkmanName',width:100">联系人</th>
+								<th data-options="field:'phone',width:100">电话</th>
+								<th data-options="field:'cellphone',width:100">手机</th>
+								<th data-options="field:'fax',width:100">传真</th>
+								<th data-options="field:'linkmanAddr',width:140">地址</th>
+								<th data-options="field:'email',width:120">邮箱</th>
+							</tr>
+						</thead>
+					</table>
+					<div id="tb" style="padding:10px 5px;">
+						票种名称：<input class="easyui-textbox" type="text" name="searchName" style="width:100px"/>
+						门市价格：<input class="easyui-textbox" type="text" name="searchPrice" style="width:100px"/>
+						<a href="#" class="easyui-linkbutton" iconCls="icon-search">查看</a>
+					</div>
+					<div id="ft" style="padding:2px 5px;">
+						<a href="javascript:edit()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+						<a href="javascript:del()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+						<a href="javascript:view()" class="easyui-linkbutton" iconCls="icon-search" plain="true">查看</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="editwin" class="easyui-window" modal="true" title="修改" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-edit" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="editee"></div>
+			<br>
+			<div align="center">
+				<a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onClick="editsave('edit','travelAction_saveOrUpdate.action')">确认</a>
+				<a class="easyui-linkbutton" iconCls="icon-reload" href="javascript:void(0)" onClick="clr()">清空</a>					
+			</div>
+	</div>
+	
+	<form id="editForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table cellpadding="5" >
+			<tr style="display:none">
+				<th>
+					<font color="red">*</font>&nbsp;row
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.id" id="editId"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;旅行社ID
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.travelId" id="editTravelId"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp旅行社名称
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.travelName" id="editTravelName" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;属地
+				</th>
+				<td>
+					<!-- <select class="easyui-combobox" name="language" >
+						name没写
+						<option value="area">--请选择--</option>
+						<option value="area">--陕西省--</option>
+					</select>&nbsp;
+					<select class="easyui-combobox" name="language">
+						<option value="area">--请选择--</option>
+						<option value="ar">--渭南市--</option>	
+					</select>&nbsp; -->
+					
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;联系人
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.linkmanName" id="editLinkmanName"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;电话
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.phone" id="editPhone"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;手机
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.cellphone" id="editCellphone"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;传真
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.fax" id="editFax" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;地址
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.linkmanAddr" id="editLinkmanAddr" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;邮箱
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' name="travel.email" id="editEmail"  size="20" maxlength="50" />
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>
+	
+	<div id="viewwin" class="easyui-window" modal="true" title="查看" style="top: 50px; padding: 10px; width: 700px; " iconCls="icon-search" closed="true" maximizable="false" minimizable="false" collapsible="false">
+			<div id="viewee"></div>
+			<br>
+	</div>
+	
+	<form id="viewForm" class="easyui-form"  method="post" action="" >
+	<div>
+		<table cellpadding="5" >
+			<tr style="display:none">
+				<th>
+					<font color="red">*</font>&nbsp;row
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.id" id="viewId"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;旅行社ID
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.travelId" id="viewTravelId"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp旅行社名称
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.travelName" id="viewTravelName" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;属地
+				</th>
+				<td>
+					<select class="easyui-combobox" name="language" >
+						<!-- name没写 -->
+						<!-- <option value="area">--请选择--</option>
+						<option value="area">--陕西省--</option> -->
+					</select>&nbsp;
+					<select class="easyui-combobox" name="language">
+						<!-- <option value="area">--请选择--</option>
+						<option value="ar">--渭南市--</option>	 -->
+					</select>&nbsp;
+				</td>
+			</tr>
+			
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;联系人
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.linkmanName" id="viewLinkmanName"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;电话
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.phone" id="viewPhone"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;手机
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.cellphone" id="viewCellphone"  size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;传真
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.fax" id="viewFax" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;地址
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.linkmanAddr" id="viewLinkmanAddr" size="20" maxlength="50" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<font color="red">*</font>&nbsp;邮箱
+				</th>
+				<td>
+					<input  class="easyui-textbox" type='text' disable="disable" name="travel.email" id="viewEmail"  size="20" maxlength="50" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+</body>
+</html>
+<script>
+$('#tt').tabs({   
+	//border:false,   
+	onSelect:function(title){   
+	    //alert(title+' is selected');   
+	}
+});
+function edit(){
+	var row = $('#tList').datagrid('getSelected');		
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		var id = row.id;
+		setValue("edit",id);
+		hc_ButtonDefaultHandle("edit");
+	}
+}
+
+function view(){
+	var row = $('#tList').datagrid('getSelected');	
+	if(row==null){
+		alert("请选择一条数据！");
+		return;
+	}else{
+		setValue("view",row.id);
+		$("#viewForm input").attr("disabled",true);
+		hc_ButtonDefaultHandle("view");
+	}
+}
+
+function setValue(formID,id){
+	$.ajax({
+		type:"post",
+		url:"travelAction_findById.action",
+		data:{"travel.id":id},
+		dataType:"json",
+		success:function(data){
+		//	$("#"+formID+"id").val(data.travelId);
+			$("#"+formID+"Id").textbox('setValue',id);
+			$("#"+formID+"TravelId").textbox('setValue',data.travelId);
+			$("#"+formID+"TravelName").textbox('setValue',data.travelName);
+			$("#"+formID+"TravelAddr").textbox('setValue',data.travelAddr);
+			$("#"+formID+"LinkmanName").textbox('setValue',data.linkmanName);
+			$("#"+formID+"Phone").textbox('setValue',data.phone);
+			$("#"+formID+"Cellphone").textbox('setValue',data.cellphone);
+			$("#"+formID+"Fax").textbox('setValue',data.fax);
+			$("#"+formID+"LinkmanAddr").textbox('setValue',data.linkmanAddr);
+			$("#"+formID+"Email").textbox('setValue',data.email);
+		}
+	});
+	
+}
+
+function del(){
+	var row = $("#tList").datagrid("getSelected");
+	if(null == row){
+		alert("请您选择一条数据");
+	}else{
+		if(window.confirm("您确认删除吗？")){
+			$.ajax({
+				type:"post",
+				url:"travelAction_delete.action",
+				data:{"travel.id":row.id},
+				dataType:"json",
+				error:function(response){
+					alert(response.responseText);
+				},
+				success:function(data){
+					alert("删除成功！");
+					$("#tList").datagrid('reload');
+				}
+			});
+		}
+	}
+}
+
+
+function doQuery(){
+	var name = $("#searchName").textbox("getValue");
+	var cname;
+	if(null == name || "" == name){
+		cname = "";
+	}else{
+		cname = name;
+	}
+	
+	$("#tList").datagrid('options').queryParams={
+		"name":cname	// json	
+	};
+	
+	$("#tList").datagrid('reload');
+	
+}
+
+function hc_ButtonDefaultHandle(formID){
+	$('#' + formID + 'win').window('open');
+	$('#' + formID + 'Form').show();
+	$('#' + formID + 'Form').appendTo('#' + formID + 'ee');
+}
+function clr(){
+	$('#addForm').form('clear');	
+}
+//新增
+function hc_addsave(formname,urlaction){
+}
+
+function editsave(formID,actionURL){
+	ajaxSubmit(formID,actionURL);
+}
+
+function ajaxSubmit(formID,actionURL){
+	
+	$("#"+formID+"Form").form('submit', {
+		url : actionURL,
+		onSubmit : function() {
+			return true;
+		},
+		type : "POST", // 设置请求类型为"POST"，默认为"GET"
+		success : function() {					
+				alert("添加成功！");
+				clr();
+				$("#"+formID+"win").window("close");
+				$("#tList").datagrid('reload');
+		}
+	});
+}
+</script>

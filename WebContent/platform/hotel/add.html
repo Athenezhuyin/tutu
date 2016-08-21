@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+body {background:white;}
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+</head>
+<body>
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="../images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	<div class="easyui-tabs" fit="true">
+		<div title="渠道" style="padding:10px">
+			<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true">
+				<div title="添加人（个人信息表）" style="padding:10px;">
+					 <table width="70%" border="0" cellpadding="10" cellspacing="10" class="list">
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;申请人姓名（中文）：&nbsp;
+								<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+							</td>
+							<td colspan="1">
+								<font color="red">*</font>&nbsp;性别 ：&nbsp;
+								<select class="easyui-combobox" name="sex" style="width:50px;">
+									<option value="boy">男</option>
+									<option value="girl">女</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font color="red">*</font>&nbsp;出生年月日：&nbsp;
+								<input class="easyui-textbox" type="text" name="birthday" data-options="required:true"></input>
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;出生地：&nbsp;
+								<input class="easyui-textbox" type="text" name="birthplace" data-options="required:true"></input>
+							</td>
+							<td>
+								<font color="red">*</font>&nbsp;身份证号码：&nbsp;
+								<input class="easyui-textbox" type="text" name="IDcard" data-options="required:true"></input>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="right">
+								<input type="submit" value="sumbit" />
+							</td>
+						</tr>
+						
+					</table>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+$('#tt').tabs({   
+	//border:false,   
+	onSelect:function(title){   
+	    //alert(title+' is selected');   
+	}
+});
+</script>

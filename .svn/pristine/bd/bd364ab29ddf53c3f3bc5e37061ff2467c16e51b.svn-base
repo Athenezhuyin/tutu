@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/default/linkbutton.css">
+<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+body {background:white;}
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+</head>
+<body>
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="../images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	
+	<div class="easyui-tabs" fit="true">
+		<div title="旅行社" style="padding:10px">
+			<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true">
+				<div title="添加旅行社" style="padding:10px;">
+					<form method="post" id="addForm">
+					 <table width="50%" border="0" cellpadding="10" cellspacing="10" class="list">
+					 		<tr>
+								<th>
+									<font color="red">*</font>&nbsp;旅行社ID
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.travelId" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;旅行社名称
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.travelName" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;属地
+								</th>
+								<td>
+									<select class="easyui-combobox" data-options="required:true" name="provinceid" id="province" onchange="getCity();">
+										
+									</select>&nbsp;
+									<select class="easyui-combobox" data-options="required:true" id="city">
+										
+									</select>&nbsp;
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;联系人
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.linkmanName" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;电话
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.phone" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;手机
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.cellphone" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;传真
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.fax" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;地址
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.linkmanAddr" value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									<font color="red">*</font>&nbsp;邮箱
+								</th>
+								<td>
+									<input  class="easyui-textbox" type='text' name="travel.email" 	value="" size="20" maxlength="50" data-options="required:true"/>
+								</td>
+							</tr>
+						</table>
+						</form>
+						<div align="center">
+							<a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onClick="javascript:ajaxSubmit();">确认</a>
+							<a class="easyui-linkbutton" iconCls="icon-reload" href="javascript:void(0)" onClick="javascript:clr();">清空</a>					
+						</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
+<script>
+getProvince();
+
+$('#tt').tabs({   
+	//border:false,   
+	onSelect:function(title){   
+	    //alert(title+' is selected');   
+	}
+});
+
+function ajaxSubmit(){
+	
+	$("#addForm").form('submit', {
+		url : "travelAction_saveOrUpdate.action",
+		onSubmit : function() {
+			return true;
+		},
+		type : "POST", // 设置请求类型为"POST"，默认为"GET"
+		success : function() {					
+				alert("添加成功！");
+				clr();
+		}
+	});
+}
+
+function clr(){
+	$("#addForm").form('clear');	
+}
+
+function getProvince(){
+	/*  var xmlHttpRequest = new XMLHttpRequest();
+	 xmlHttpRequest.open("get","jLAction_getComboxAddr.action?method=province");
+	 xmlHttpRequest.onreadystatechange = function(){
+		 if(xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200){
+			 var data = eval(xmlHttpRequest.responseText);
+			 alert($(".easyui-combobox").html());
+		//	 alert($("#province").html);
+			 var arr = [];
+			 for(var i=0;i<data.length;i++){
+				 arr.push("<option width='200px'  value ='"+data[i][0]+"'>"+data[i][1]+"</option>");
+			 }
+			 alert(arr.join(""));
+			// $(".easyui-combobox").html(arr.join(""));
+			$("#province").html(arr.join(""));
+		 }
+		 getCity();
+	 }
+	 xmlHttpRequest.send(null) */;
+}
+
+function getCity(){
+	/*  var xmlHttpRequest = new XMLHttpRequest();
+	 xmlHttpRequest.open("get","jLAction_getComboxAddr.action?method=city&&id="+document.getElementById("province").value);
+	 xmlHttpRequest.onreadystatechange = function(){
+		 if(xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200){
+			 var data = eval(xmlHttpRequest.responseText);
+			 var arr = [];
+			 for(var i=0;i<data.length;i++){
+				 arr.push("<option  value ='"+data[i][0]+"'>"+data[i][1]+"</option>");
+			 }
+			 $("#city").innerHTML=arr.join("");
+		 }
+		 getDistrict();
+	 }
+	 xmlHttpRequest.send(null); */
+}
+</script>

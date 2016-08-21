@@ -1,0 +1,64 @@
+package com.zrcx.tutu.JLMg.view;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.common.action.BaseAction;
+import com.zrcx.tutu.JLMg.dao.JLDao;
+
+import net.sf.json.JsonUtil;
+
+
+@Controller
+public class JLAction extends BaseAction{
+	
+	@Resource(name="jLDao")
+	private JLDao jLDao = new JLDao();
+	
+	private String method;
+	
+	private int id;
+	
+	// http://localhost/Tutu/jLAction_getComboxAddr.action?method=province
+	//http://localhost/Tutu/jLAction_getComboxAddr.action?method=city&&id=10
+	public void getComboxAddr(){
+		
+		List<Object[]> list = null;
+		
+		/*if(method.equals("province")){
+			list = jLDao.getProvince();
+		} else if(method.equals("city")){
+			list = jLDao.getCity(id);
+		}
+		writeAddrJson(list);*/
+		
+		if(method.equals("province")){
+			writeJson(jLDao.getProvince());
+		} else if(method.equals("city")){
+			writeJson(jLDao.getCity(id));
+		} 
+		
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+}

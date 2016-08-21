@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>北京市途途旅游公共平台 后台管理</title>
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css">
+<script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="common/common.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	$('#loading-mask').fadeOut();
+}
+</script>
+
+<style>
+* {padding:0; margin: 0;}
+li {list-style:none;}
+a {text-decoration:none;}
+
+#north {
+	overflow: hidden; 
+	height:60px;
+	background: #f7f9fc;
+}
+
+#north li {
+	float:left;
+}
+
+#north .right {
+	height:40px;
+	padding-top:35px;
+	font-size:14px;
+	float: right;
+	font-family: "宋体";
+}
+
+#west hr {
+	margin:10px 0; margin-left:5px;height:1px;border:none;
+	border-top:1px solid #CCCCCC;width:150px;
+}
+
+#west li a {
+	color: #0E2D5F;
+}
+
+#west li {
+	margin:3px;
+	padding:10px;
+	cursor:pointer;
+}
+
+#west li:hover {
+	outline: 1px solid #95b8e7;
+	background:#dce8f9;
+}
+</style>
+</head>
+
+<body class="easyui-layout" style="overflow-y: hidden" fit="true" scroll="no">
+
+	<div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+	<div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:30px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;"> 
+		<img src="images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
+	</div>
+
+	<!-- 顶部 -->
+    <div id="north" region="north" split="true" border="false">
+		<div>
+			<li><img src="images/logo.png"></li>
+			<li class="right">【提醒(1)】欢迎：<span>admin</span>登录 <a href="javascript:$('#dg1').dialog('open');">【退出】</a></li>
+		</div>
+    </div>
+	
+	<!-- 底部 -->
+    <div region="south" split="true" style="height: 30px; background: #D2E0F2;text-align:right;padding-top:5px;padding-right:20px;">
+       	北京市途途旅游公共平台 v1.0
+    </div>
+	
+	<!--  导航内容 -->
+    <div region="west" split="true"  title="导航菜单" style="width:180px;" id="west">
+		<div class="easyui-accordion" style="height:100%;">
+			<div title="景区管理">
+				<li><a href="scenic/table.html" target="iframe">景区维护</a></li>
+				<li><a href="scenic/addscenic.html" target="iframe">添加景区</a></li>
+			</div>
+			<div title="票价管理">
+				<li><a href="price/table.html" target="iframe">票价管理</a></li>
+				<li><a href="price/add.html" target="iframe">添加票价</a></li>
+			</div>
+			<div title="渠道管理">
+				<li><a href="privoder/table.html" target="iframe">渠道维护</a></li>
+				<li><a href="privoder/addprivoder.html" target="iframe">添加渠道</a></li>
+				<li><a href="privoder/add.html" target="iframe">添加人</a></li>
+			</div>
+			
+			<div title="旅行社管理">
+				<li><a href="travel/table.html" target="iframe">旅行社维护</a></li>
+				<li><a href="travel/addtravel.html" target="iframe">添加旅行社</a></li>
+				<li><a href="travel/add.html" target="iframe">添加人</a></li>
+			</div>
+			
+			<div title="出行活动管理">
+				<li><a href="active/table.html" target="iframe">活动维护</a></li>
+				<li><a href="active/addactive.html" target="iframe">添加活动</a></li>
+			</div>
+			
+			<div title="酒店管理">
+				<li><a href="hotel/table.html" target="iframe">酒店维护</a></li>
+				<li><a href="hotel/tableperson.html" target="iframe">酒店人员</a></li>
+			</div>
+			
+			<div title="服务人员管理">
+				<li><a href="service/table.html" target="iframe">人员维护</a></li>
+				<li><a href="service/addservice.html" target="iframe">添加人员</a></li>
+			</div>
+			
+			<div title="管理员管理">
+				<li><a href="admin/table.html" target="iframe">管理员维护</a></li>
+				<li><a href="admin/addadmin.html" target="iframe">添加管理员</a></li>
+			</div>
+
+		</div>
+    </div>
+    
+  
+	<!-- 主页面 -->
+    <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
+		<iframe name="iframe" scrolling="no" frameborder="0"  src="welcome.html" style="width:100%;height:100%;"></iframe>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+[{
+	"id":1,
+	"text":"司机安先生",
+	"desc":"Write once, run anywhere"
+},{
+	"id":2,
+	"text":"导游董小姐",
+	"desc":"One of the programming languages designed for the Common Language Infrastructure"
+},{
+	"id":3,
+	"text":"导游星小姐",
+	"selected":true,
+	"desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},{
+	"id":4,
+	"text":"导游x小姐",
+	"desc":"A high-level, general-purpose, interpreted, dynamic programming language"
+},{
+	"id":5,
+	"text":"导游xx小姐",
+	"desc":"A family of general-purpose, high-level programming languages"
+}]

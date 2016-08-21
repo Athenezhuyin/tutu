@@ -1,0 +1,58 @@
+package com.zrcx.tutu.JLMg.bean;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="city")
+public class City {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="CityId",unique=true,nullable=false)
+	private int Id;
+	
+	@Column(name="CityName", unique=false)
+	private String Name;
+
+	@Column(name="ProvinceId", unique=false)
+	private int provinceId;
+	
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	
+	public int getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	@Override
+	public String toString() {
+		return "City [Id=" + Id + ", Name=" + Name + "]";
+	}
+
+	
+	
+	
+}
